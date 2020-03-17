@@ -53,3 +53,8 @@ if settings.DEBUG:
         import debug_toolbar
 
         urlpatterns = [path("__debug__/", include(debug_toolbar.urls))] + urlpatterns
+######################################################################
+admin.site.site_header = "Daily Python Tips"
+admin.site.site_title = "PyTips"
+admin.site.index_title = "PyTips Admin"
+#######################################################################
