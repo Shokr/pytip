@@ -63,3 +63,4 @@ django-anymail[mailgun]  # https://github.com/anymail/django-anymail
 # Extra
 # ------------------------------------------------------------------------------
 tweepy
+django-grappelli

@@ -12,9 +12,11 @@ urlpatterns = [
                       "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
                   ),
                   # Django Admin, use {% url 'admin:index' %}
+                  path('grappelli/', include('grappelli.urls')),  # grappelli URLS
                   path(settings.ADMIN_URL, admin.site.urls),
                   # User management
                   path("users/", include("pytip.users.urls", namespace="users")),
+                  # path("core/", include("pytip.core.urls", namespace="core")),
                   path("accounts/", include("allauth.urls")),
                   # Your stuff: custom urls includes go here
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
