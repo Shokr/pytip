@@ -1,4 +1,7 @@
+import uuid
+
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 
 from pytip.users.models import User
@@ -32,3 +35,16 @@ class Tweet(models.Model):
 
     def __str__(self):
         return '[{}]'.format(self.tweet)
+
+    def save(self, *args, **kwargs):
+
+        if self.published is True and self.time_published is None:
+            self.time_published = timezone.now()
+
+        if self.pk is None:
+            self.tweet = uuid.uuid1().int >> 64
+
+        super(Tweet, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("core:tweet-detail", kwargs={"pk": self.pk})

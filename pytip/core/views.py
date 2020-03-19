@@ -8,12 +8,12 @@ from .froms import *
 
 class TweetCreate(CreateView):
     model = Tweet
-    fields = ['text']
+    fields = ['text', 'urls', 'medias', 'tags', 'published', 'publisher', 'time_published']
 
 
 class TweetUpdate(UpdateView):
     model = Tweet
-    fields = ['text']
+    fields = ['text', 'urls', 'medias', 'tags', 'published', 'publisher', 'time_published']
 
 
 class TweetDelete(DeleteView):
