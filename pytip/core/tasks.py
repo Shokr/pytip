@@ -7,7 +7,8 @@ from celery.task import periodic_task
 from pytip.core.models import Tweet
 
 
-@periodic_task(run_every=(crontab(minute='5')), name="sync_tweets")
+@periodic_task(run_every=(crontab(minute='*/15')), name="sync_tweets")
+# @shared_task
 def sync_tweets():
     auth = tweepy.OAuthHandler('P4L0JIFEH8abGpiDCJZZfNwxJ', 'HGJS3zbqH57S5Blqpm6wOe4sUoZnaBOpeKttrcb9FTUu8jGU0H')
     auth.set_access_token('2716340250-mbZpFIuiz2uGWMm7sjbcM1XOz70abbT2RbVhWNb',
@@ -29,6 +30,8 @@ def sync_tweets():
 
         text = re.sub(r'&gt;', '>', tweet.text, flags=re.MULTILINE)
 
+        print(tweet)
+
         if Tweet.objects.filter(tweet=tweet.tweet).exists():
             print('Updating..')
             Tweet.objects.filter(tweet=tweet.tweet).update(re_tweet_count=tweet.retweet_count,
@@ -40,3 +43,5 @@ def sync_tweets():
                        re_tweet_count=tweet.retweet_count, favorite_count=tweet.favorite_count,
                        urls=urls, medias=medias, tags=hashtags)
             print(tweet.id)
+
+# sync_tweets
