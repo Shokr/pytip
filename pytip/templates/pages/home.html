@@ -1,1 +1,14 @@
 {% extends "base.html" %}
+
+{% block content %}
+    <br>
+    <div class="container">
+        <div class="row">
+            <ul>
+                <li>
+                    <a href="{% url 'core:home' %}"><h1>Tweetify</h1></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

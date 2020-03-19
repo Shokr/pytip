@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <h1>{{ object.tweet|cut:"."|cut:"e+18" }}</h1>
+                <p>{{ object.text }}</p>
+                <p>retweetCount: {{ object.re_tweet_count }}</p>
+                <p>favoriteCount: {{ object.favorite_count }}</p>
+                <p>Created_at: {{ object.created_at|date }}</p>
+
+                {#                <p>{{ object.urls.1 }}</p>#}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

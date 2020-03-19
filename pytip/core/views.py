@@ -1,60 +1,30 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.list import ListView
 
 from .froms import *
 
 
-@login_required
-def addTweet(request):
-    if request.method == 'POST':
-        created_Tweet_pk = None
-        filled_form = TweetForm(request.POST)
-        if filled_form.is_valid():
-            created_Tweet = filled_form.save()
-            created_Tweet_pk = created_Tweet.pk
-            note = 'Tweet %s was created' % (filled_form.cleaned_data['name'])
-            filled_form = TweetForm()
-        else:
-            note = 'Tweet was not created, please try again'
-        new_form = TweetForm()
-
-        return render(request, 'core/addTweet.html',
-                      {'TweetForm': filled_form, 'note': note, 'created_Tweet_pk': created_Tweet_pk})
-        # return redirect('core:list_Tweets')
-    else:
-        form = TweetForm()
-        return render(request, 'core/addTweet.html', {'TweetForm': form})
+class TweetCreate(CreateView):
+    model = Tweet
+    fields = ['text']
 
 
-@login_required
-def editTweet(request, pk):
-    tweet = Tweet.objects.get(pk=pk)
-    form = TweetForm(instance=tweet)
-    if request.method == 'POST':
-        filled_form = TweetForm(request.POST, instance=tweet)
-        if filled_form.is_valid():
-            filled_form.save()
-            form = filled_form
-            note = 'Your Tweet has been processed.'
-            return render(request, 'core/editTweet.html', {'TweetForm': form, 'Tweet': tweet, 'note': note})
-            # return redirect('core:list_Tweets')
-    return render(request, 'core/editTweet.html', {'TweetForm': form, 'Tweet': tweet})
+class TweetUpdate(UpdateView):
+    model = Tweet
+    fields = ['text']
 
 
-@login_required
-def viewTweet(request, pk):
-    tweet = get_object_or_404(Tweet, pk=pk)
-    return render(request, 'core/viewTweet.html', {'Tweet': tweet})
+class TweetDelete(DeleteView):
+    model = Tweet
+    success_url = reverse_lazy('core:home')
 
 
-@login_required
-def listTweets(request):
-    tweets = Tweet.objects.get_queryset()
-    return render(request, 'core/home.html', {'Tweets': tweets})
+class TweetDetailView(DetailView):
+    model = Tweet
 
 
-@login_required
-def deleteTweet(request, pk):
-    tweet = Tweet.objects.get(pk=pk)
-    tweet.delete()
-    return redirect('core:home')
+class TweetListView(ListView):
+    model = Tweet
+    paginate_by = 10

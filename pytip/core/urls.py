@@ -5,10 +5,10 @@ from .views import *
 app_name = 'core'
 
 urlpatterns = [
-    path('', listTweets, name='home'),
+    path('', TweetListView.as_view(), name='home'),
 
-    path('tweet/add', addTweet, name='addTweet'),
-    path('tweet/edit/<int:pk>/', editTweet, name='editTweet'),
-    path('tweet/delete/<int:pk>/', deleteTweet, name='deleteTweet'),
-    path('<int:pk>', viewTweet, name='viewTweet'),
+    path('add/', TweetCreate.as_view(), name='tweet-add'),
+    path('update/<int:pk>/', TweetUpdate.as_view(), name='tweet-update'),
+    path('<int:pk>/delete/', TweetDelete.as_view(), name='tweet-delete'),
+    path('<int:pk>/', TweetDetailView.as_view(), name='tweet-detail'),
 ]

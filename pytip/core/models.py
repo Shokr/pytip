@@ -10,6 +10,7 @@ class Tweet(models.Model):
     created_at = models.DateTimeField(db_column='TimeCreated', default=timezone.now)
     re_tweet_count = models.BigIntegerField(db_column='RetweetCount', blank=True, null=True)
     favorite_count = models.BigIntegerField(db_column='FavoriteCount', blank=True, null=True)
+
     urls = models.TextField(db_column='Urls', blank=True, null=True)
     medias = models.TextField(db_column='Medias', blank=True, null=True)
     tags = models.TextField(db_column='Tags', blank=True, null=True)
