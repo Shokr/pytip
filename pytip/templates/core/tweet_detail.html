@@ -1,18 +1,32 @@
 {% extends 'base.html' %}
+{% load social_share %}
+
 
 {% block content %}
+    <br>
     <div class="container">
         <div class="row">
+
             <div class="col-lg-8 col-md-10 mx-auto">
-                <h1>{{ object.tweet|cut:"."|cut:"e+18" }}</h1>
-                <p>{{ object.text }}</p>
-                <p>retweetCount: {{ object.re_tweet_count }}</p>
-                <p>favoriteCount: {{ object.favorite_count }}</p>
-                <p>Created_at: {{ object.created_at|date }}</p>
 
-                {#                <p>{{ object.urls.1 }}</p>#}
-
+                <div class="card" style="width: 18rem;">
+                    {#                <img class="card-img-top" src="..." alt="Card image cap">#}
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: #0A246A">{{ object.tweet|cut:"."|cut:"e+18" }}</h5>
+                        <hr>
+                        <p class="card-text">{{ object.text }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Retweets: {{ object.re_tweet_count }}</li>
+                        <li class="list-group-item">Favorite: {{ object.favorite_count }}</li>
+                        <li class="list-group-item">Created at: {{ object.created_at|date }}</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="card-link">{% post_to_twitter "{{object.text}}" %}</a>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 {% endblock %}
