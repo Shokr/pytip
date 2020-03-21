@@ -12,7 +12,7 @@
                 <div class="card" style="width: 18rem;">
                     {#                <img class="card-img-top" src="..." alt="Card image cap">#}
                     <div class="card-body">
-                        <h5 class="card-title" style="color: #0A246A">{{ object.tweet|cut:"."|cut:"e+18" }}</h5>
+                        <h5 class="card-title" style="color: #0A246A">{{ object.tweet|cut:"." }}</h5>
                         <hr>
                         <p class="card-text">{{ object.text }}</p>
                     </div>

@@ -64,7 +64,7 @@
                     <div class="post-preview">
                         <a href="{% url 'core:tweet-detail' tweet.pk %}">
                             <h5 class="post-subtitle">
-                                {{ tweet.tweet|cut:"."|cut:"e+18" }}
+                                {{ tweet.tweet|cut:"." }}
                             </h5>
                         </a>
 
