@@ -10,7 +10,7 @@ from pytip.users.models import User
 class Tweet(models.Model):
     tweet = models.FloatField(db_column='IdTweet', unique=True)
     text = models.TextField(db_column='TweetText', max_length=280)
-    created_at = models.DateTimeField(db_column='TimeCreated', default=timezone.now)
+    created_at = models.DateTimeField(db_column='TimeCreated', blank=True, null=True)
     re_tweet_count = models.BigIntegerField(db_column='RetweetCount', blank=True, null=True)
     favorite_count = models.BigIntegerField(db_column='FavoriteCount', blank=True, null=True)
 

@@ -16,7 +16,7 @@ def sync_tweets():
 
     api = tweepy.API(auth)
 
-    results = api.user_timeline(id="python_tip", count=10)
+    results = api.user_timeline(id="python_tip", count=5)
 
     for tweet in results:
 

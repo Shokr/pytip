@@ -9,7 +9,7 @@ urlpatterns = [
 
     path('add/', TweetCreate.as_view(), name='tweet-add'),
     path('update/<int:pk>/', TweetUpdate.as_view(), name='tweet-update'),
-    path('<int:pk>/delete/', TweetDelete.as_view(), name='tweet-delete'),
+    # path('delete/<int:pk>/', TweetDelete.as_view(), name='tweet-delete'),
     path('<int:pk>/', TweetDetailView.as_view(), name='tweet-detail'),
 
     path('search/', SearchResultsView.as_view(), name='search'),
